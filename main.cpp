@@ -12,17 +12,17 @@ using namespace std;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 /** PROCEDIMIENTOS DEL SISTEMA */
-void Ingresos();
-void buscar();
-void sumar();
-void restar();
-void consultas();
-void modificaciones();
-void Facturar();
-void salir();
 void menu();
-void FactProd();
-void MostrarFact();
+void Ingresos();
+void consultas();
+void buscar();
+// void sumar();
+// void restar();
+// void modificaciones();
+// void Facturar();
+// void salir();
+// void FactProd();
+// void MostrarFact();
 
 /** VARIABLES GLOBALES DEL SISTEMA*/
 char nombre[30];
@@ -81,31 +81,31 @@ void menu(){
           buscar();
           system("pause");
             break;
-        case 4:
-          system("cls");
-          sumar();
-          system("pause");
-            break;
-        case 5:
-          system("cls");
-          restar();
-          system("pause");
-            break;
-        case 6:
-          system("cls");
-          Facturar();
-          system("pause");
-            break;
-        case 7:
-          system("cls");
-          MostrarFact();
-          system("pause");
-            break;
-        case 8:
-          system("cls");
-          salir();
-          system("pause");
-            break;
+        // case 4:
+        //   system("cls");
+        //   sumar();
+        //   system("pause");
+        //     break;
+        // case 5:
+        //   system("cls");
+        //   restar();
+        //   system("pause");
+        //     break;
+        // case 6:
+        //   system("cls");
+        //   Facturar();
+        //   system("pause");
+        //     break;
+        // case 7:
+        //   system("cls");
+        //   MostrarFact();
+        //   system("pause");
+        //     break;
+        // case 8:
+        //   system("cls");
+        //   salir();
+        //   system("pause");
+        //     break;
 
         default:
         cout<<"�Opcion Incorrecta!"<<endl;
@@ -228,10 +228,10 @@ void buscar(){
             cout<<"Total: "<<"\t\t\t\t$"<<Total<<endl;
             cout<<"======================================"<<endl;
             encontrado = true;
-            
+
            }
         }
-        
+
 
     }
 }
