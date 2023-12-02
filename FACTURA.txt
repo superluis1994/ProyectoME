@@ -1,0 +1,55 @@
+
+		DOCUMENTO TRIBUTARIO ELECTRONICO
+
+			FACTURA ELECTRONICA
+			xxxxxxxxxxxxxxxxxxx
+======================= DATOS DEL EMISOR ==========================
+			DUI: 252525252-2
+			COMERCIAL LA U
+	      Santa Ana 24.av Norte
+		      El SALVADOR
+
+======================= DATOS DEL COMPROBANTE =====================
+Fecha: 1-12-2023
+DUI: 1234
+NOMBRE: luis
+
+
+======================= DESCRIPCION DE LA FACTURA ==================
+Cod.	PRODUCTO	Cant.		PRECIO		Total
+
+		DOCUMENTO TRIBUTARIO ELECTRONICO
+
+			FACTURA ELECTRONICA
+			xxxxxxxxxxxxxxxxxxx
+======================= DATOS DEL EMISOR ==========================
+			DUI: 111111111
+			COMERCIAL LA U
+	      Santa Ana 24.av Norte
+		      El SALVADOR
+
+======================= DATOS DEL COMPROBANTE =====================
+Fecha: 1-12-2023
+DUI: 111111111
+NOMBRE: melvin
+
+
+======================= DESCRIPCION DE LA FACTURA ==================
+Cod.	PRODUCTO	Cant.		PRECIO		Total
+					--------------------------------
+					Total 		 $.4.59037e-41
+
+
+		      SUJETO A PAGOS TRIMESTRALES
+
+			DATOS DEL CERTIFICADOR
+			    DUI: 111111111
+		     FACTURA DE NIÑÁ MARY
+
+	CAJERO: EMMANUEL EYES
+	CODIGO: 23344556
+
+
+
+
+

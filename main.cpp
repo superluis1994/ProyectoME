@@ -125,7 +125,7 @@ void Ingresos(){
         SetConsoleTextAttribute(hConsole,1);
         cout<<"\tINGRESAR LOS DATOS DEL PRODUCTO"<<endl;
         SetConsoleTextAttribute(hConsole,8);
-        cout<<"\tIngrese el codigo del prodcuto: "<<endl;
+        cout<<"\tIngrese el codigo del producto: "<<endl;
         cin>>auxCodigo;
         consulta>>Codigo;
         while(!consulta.eof()){
@@ -142,7 +142,7 @@ void Ingresos(){
         if (repetido==false)
         {
             SetConsoleTextAttribute(hConsole,8);
-        cout<<"Ingrese el nombre del prodcuto: ";
+        cout<<"Ingrese el nombre del producto: ";
         cin>>nombre;
         cout<<"Ingrese la cantidad Existente: ";
         cin>>CantExistente;
@@ -203,7 +203,7 @@ void consultas(){
 void buscar(){
 
     ifstream lectura;
-    lectura.open(" inventario.txt",ios::out|ios::in);
+    lectura.open("inventario.txt",ios::out|ios::in);
     encontrado=false;
     if(lectura.is_open()){
         SetConsoleTextAttribute(hConsole,1);
@@ -284,7 +284,7 @@ void sumar(){
                 cin>>auxCant;
                 SetConsoleTextAttribute(hConsole, 7);
                 if(auxCant>0){
-                    CantExistente = CantExistente*auxCant;
+                    CantExistente = CantExistente+auxCant;
                     Total = CantExistente*PrecioUnit;
                     aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
                     SetConsoleTextAttribute(hConsole, 2);
@@ -419,7 +419,7 @@ void Facturar(){
     escritura<<"\t\t\tFACTURA ELECTRONICA"<<endl;
     escritura<<"\t\t\txxxxxxxxxxxxxxxxxxx"<<endl;
     escritura<<"======================= DATOS DEL EMISOR =========================="<<endl;
-    escritura<<"\t\t\tDUI: 252525252-2"<<endl;
+    escritura<<"\t\t\tDUI: 111111111"<<endl;
     escritura<<"\t\t\tCOMERCIAL LA U"<<endl;
     escritura<<"\t"<<"      "<<"Santa Ana 24.av Norte"<<endl;
     escritura<<"\t\t"<<"      "<<"El SALVADOR"<<endl<<endl;
@@ -538,7 +538,7 @@ void Facturar(){
     escritura<<endl<<endl<<endl;
     escritura<<"\t\t"<<"      "<<"SUJETO A PAGOS TRIMESTRALES"<<endl<<endl;
     escritura<<"\t\t\tDATOS DEL CERTIFICADOR"<<endl;
-    escritura<<"\t\t\t"<<"    "<<"DUI: 252525252-2"<<endl;
+    escritura<<"\t\t\t"<<"    "<<"DUI: 111111111"<<endl;
     escritura<<"\t\t"<<"     "<<"FACTURA DE NIÑÁ MARY"<<endl<<endl;
     escritura<<"\tCAJERO: EMMANUEL EYES"<<endl;
     escritura<<"\tCODIGO: 23344556"<<endl;
