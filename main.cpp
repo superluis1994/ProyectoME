@@ -22,7 +22,7 @@ void modificaciones();
 void Facturar();
 void salir();
 void FactProd();
-void MostrarFact();
+// void MostrarFact();
 
 /** VARIABLES GLOBALES DEL SISTEMA*/
 char nombre[30];
@@ -58,7 +58,7 @@ void menu(){
         cout<<"4. Ingresar producto al inventario"<<endl;
         cout<<"5. Extraer producto al inventario"<<endl;
         cout<<"6. Facturar"<<endl;
-        cout<<"7. Mostrar Facturas"<<endl;
+        // cout<<"7. Mostrar Facturas"<<endl;
         cout<<"8. Salir"<<endl;
         SetConsoleTextAttribute(hConsole,2);
         cout<<"Introduce la opcion: "<<endl;
@@ -96,11 +96,11 @@ void menu(){
           Facturar();
           system("pause");
             break;
-        case 7:
-          system("cls");
-          MostrarFact();
-          system("pause");
-            break;
+        // case 7:
+        //   system("cls");
+        //   MostrarFact();
+        //   system("pause");
+        //     break;
         case 8:
           system("cls");
           salir();
@@ -306,7 +306,7 @@ void sumar(){
             }
             lectura>>Codigo;
         }
-        
+
 
     }else{
         SetConsoleTextAttribute(hConsole, 4);
@@ -383,7 +383,7 @@ void restar(){
             }
             lectura>>Codigo;
         }
-        
+
     }else{
         SetConsoleTextAttribute(hConsole, 4);
         cout<<"\tNO SE PUDO ABRIR EL ARCHIVO O AUN NO HA IDO CREADO"<<endl<<endl<<endl;
@@ -507,7 +507,7 @@ void Facturar(){
                     }
                     lectura>>Codigo;
                  }
-                 
+
              }else{
                 SetConsoleTextAttribute(hConsole, 4);
                 cout<<"\tNO SE PUDO ABRIR EL ARCHIVO O AUN NO HA SIDO CREADO"<<endl<<endl<<endl;
@@ -524,10 +524,10 @@ void Facturar(){
              rename("auxiliar.txt","inventario.txt");
              system("pause");
         break;
-        case 2: 
+        case 2:
                 system("cls");
                 salir();
-       
+
        default:
             cout<<"!Opcion Incorrecta"<<endl;
         break;
@@ -543,24 +543,24 @@ void Facturar(){
     escritura<<"\tCAJERO: EMMANUEL EYES"<<endl;
     escritura<<"\tCODIGO: 23344556"<<endl;
     escritura<<endl<<endl<<endl<<endl<<endl;
-    escritura.close(); 
+    escritura.close();
 }
-void MostrarFact(){
-    char cadena[100];
+// void MostrarFact(){
+//     char cadena[100];
 
-    ifstream apertura("FACTURA.txt");
-    if(apertura.fail()){
-        cout<<"EL ARCHIVO NO EXISTE"<<endl;
-    }else{
-        while (apertura.getline(cadena,100) != NULL)
-        {
-            cout<<cadena<<endl;
-        }
-        
-    }
-}
+//     ifstream apertura("FACTURA.txt");
+//     if(apertura.fail()){
+//         cout<<"EL ARCHIVO NO EXISTE"<<endl;
+//     }else{
+//         while (apertura.getline(cadena,100) != NULL)
+//         {
+//             cout<<cadena<<endl;
+//         }
 
-void Salir(){
+//     }
+// }
+
+void salir(){
     SetConsoleTextAttribute(hConsole, 2);
     cout<<endl<<endl;
     cout<<"\t\tPROGRAMA FINALIZADO"<<endl<<endl<<endl;
