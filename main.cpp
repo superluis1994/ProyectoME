@@ -16,13 +16,13 @@ void menu();
 void Ingresos();
 void consultas();
 void buscar();
-// void sumar();
-// void restar();
-// void modificaciones();
-// void Facturar();
-// void salir();
-// void FactProd();
-// void MostrarFact();
+void sumar();
+void restar();
+void modificaciones();
+void Facturar();
+void salir();
+void FactProd();
+void MostrarFact();
 
 /** VARIABLES GLOBALES DEL SISTEMA*/
 char nombre[30];
@@ -81,34 +81,34 @@ void menu(){
           buscar();
           system("pause");
             break;
-        // case 4:
-        //   system("cls");
-        //   sumar();
-        //   system("pause");
-        //     break;
-        // case 5:
-        //   system("cls");
-        //   restar();
-        //   system("pause");
-        //     break;
-        // case 6:
-        //   system("cls");
-        //   Facturar();
-        //   system("pause");
-        //     break;
-        // case 7:
-        //   system("cls");
-        //   MostrarFact();
-        //   system("pause");
-        //     break;
-        // case 8:
-        //   system("cls");
-        //   salir();
-        //   system("pause");
-        //     break;
+        case 4:
+          system("cls");
+          sumar();
+          system("pause");
+            break;
+        case 5:
+          system("cls");
+          restar();
+          system("pause");
+            break;
+        case 6:
+          system("cls");
+          Facturar();
+          system("pause");
+            break;
+        case 7:
+          system("cls");
+          MostrarFact();
+          system("pause");
+            break;
+        case 8:
+          system("cls");
+          salir();
+          system("pause");
+            break;
 
         default:
-        cout<<"�Opcion Incorrecta!"<<endl;
+        cout<<"!Opcion Incorrecta!"<<endl;
             break;
         }
 
@@ -228,10 +228,341 @@ void buscar(){
             cout<<"Total: "<<"\t\t\t\t$"<<Total<<endl;
             cout<<"======================================"<<endl;
             encontrado = true;
-
+    //    minuto del video 6:55 url del video: https://www.youtube.com/watch?v=orNpC4TZ1H0&t=834s&ab_channel=Fher-nandoChal%C3%AD
+    //    linea del codigo: 222
            }
+           lectura>>Codigo;
+           SetConsoleTextAttribute(hConsole, 7);
+        }
+        if(encontrado==false) {
+           SetConsoleTextAttribute(hConsole, 4);
+            cout<<"\tNO EXISTE EL REGISTRO CON EL CODIGO "<<auxCodigo<<endl<<endl<<endl;
+           SetConsoleTextAttribute(hConsole, 7);
         }
 
 
+    }else{
+           SetConsoleTextAttribute(hConsole, 4);
+            cout<<"\tNO SE PUEDE ABRIR EL ARCHIVO, AUN NO HA SIDO CREADO "<<endl<<endl;
+           SetConsoleTextAttribute(hConsole, 7);
     }
+    lectura.close();
+}
+
+void sumar(){
+    ofstream aux;
+    ifstream lectura;
+    encontrado = false;
+    int auxCodigo = 0;
+    int auxCant;
+    aux.open("auxiliar.txt",ios::out);
+    lectura.open("inventario.txt",ios::in);
+    if(aux.is_open() && lectura.is_open()){
+        SetConsoleTextAttribute(hConsole, 1);
+        cout<<endl<<endl;
+        cout<<"INGRESE EL CODIGO DEL PRODUCTO A CARGAR: ";
+        cin>>auxCodigo;
+        cout<<endl<<endl;
+        lectura>>Codigo;
+        while (!lectura.eof())
+        {
+            lectura>>nombre>>CantExistente>>PrecioUnit>>Total;
+            if(auxCodigo == Codigo){
+                encontrado = true;
+                SetConsoleTextAttribute(hConsole, 4);
+                cout<<"\tDATOS DEL PRODUCTO AL QUE DESEA CARGAR"<<endl;
+                SetConsoleTextAttribute(hConsole, 8);
+                cout<<"========================================"<<endl;
+                cout<<"Codigo: "<<"\t\t\t"<<Codigo<<endl;
+                cout<<"Nombre del Producto: "<<"\t\t"<<nombre<<endl;
+                cout<<"Cantidad Existente: "<<"\t\t"<<CantExistente<<endl;
+                cout<<"Precio Unitario: "<<"\t\t$"<<PrecioUnit<<endl;
+                cout<<"Total: "<<"\t\t\t\t$"<<Total<<endl;
+                cout<<"========================================"<<endl;
+                SetConsoleTextAttribute(hConsole, 1);
+                cout<<"INGRESE LA CANTIDAD DE "<<nombre<<" A CARGAR  ";
+                cin>>auxCant;
+                SetConsoleTextAttribute(hConsole, 7);
+                if(auxCant>0){
+                    CantExistente = CantExistente*auxCant;
+                    Total = CantExistente*PrecioUnit;
+                    aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+                    SetConsoleTextAttribute(hConsole, 2);
+                    cout<<endl<<endl;
+                    cout<<"\tCANTIDAD ACTUALIZADA"<<endl<<endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                }
+                else{
+                    SetConsoleTextAttribute(hConsole, 4);
+                    cout<<endl<<endl;
+                    cout<<"\tCANTIDAD NO VALIDA"<<endl<<endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                    aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+
+                }
+            }else{
+                    aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+
+            }
+            lectura>>Codigo;
+        }
+        
+
+    }else{
+        SetConsoleTextAttribute(hConsole, 4);
+        cout<<endl<<endl;
+        cout<<"\tNO SE PUDO ABRIR ELARCHIVO O AUN NO HA SIDO CREADO"<<endl<<endl;
+        SetConsoleTextAttribute(hConsole, 7);
+
+    }
+    if (encontrado == false)
+    {
+        SetConsoleTextAttribute(hConsole, 4);
+        cout<<"\tNO EXISTEN REGISTROS CON EL CODIGO "<<auxCodigo<<endl<<endl<<endl;
+        SetConsoleTextAttribute(hConsole, 7);
+    }
+    aux.close();
+    lectura.close();
+    remove("inventario.txt");
+    rename("auxiliar.txt","inventario.txt");
+
+}
+
+void restar(){
+    ofstream aux;
+    ifstream lectura;
+    encontrado = false;
+    int auxCodigo = 0;
+    int auxCant;
+    aux.open("auxiliar.txt",ios::out);
+    lectura.open("inventario.txt",ios::in);
+    if (aux.is_open() && lectura.is_open())
+    {
+        SetConsoleTextAttribute(hConsole, 1);
+        cout<<"INGRESE EL CODIGO EL PRODUCTO A DESCARGAR: ";
+        cin>>auxCodigo;
+        cout<<endl<<endl;
+        lectura>>Codigo;
+        while (!lectura.eof())
+        {
+            lectura>>nombre>>CantExistente>>PrecioUnit>>Total;
+            if(auxCodigo == Codigo){
+                encontrado=true;
+                SetConsoleTextAttribute(hConsole, 4);
+                cout<<"\tDATOS DEL PRODUCTO AL QUE SERA DESCARGADO"<<endl;
+                SetConsoleTextAttribute(hConsole, 8);
+                cout<<"========================================"<<endl;
+                cout<<"Codigo: "<<"\t\t\t"<<Codigo<<endl;
+                cout<<"Nombre del Producto: "<<"\t\t"<<nombre<<endl;
+                cout<<"Cantidad Existente: "<<"\t\t"<<CantExistente<<endl;
+                cout<<"Precio Unitario: "<<"\t\t$"<<PrecioUnit<<endl;
+                cout<<"Total: "<<"\t\t\t\t$"<<Total<<endl;
+                cout<<"========================================"<<endl;
+                SetConsoleTextAttribute(hConsole, 1);
+                cout<<"INGRESE LA CANTIDAD A DESCARGAR DEL INVENTARIO DEL PRODUCTO"<<nombre<<": ";
+                SetConsoleTextAttribute(hConsole, 8);
+                cin>>auxCant;
+                cout<<endl;
+                if (auxCant <= CantExistente)
+                {
+                    CantExistente = CantExistente-auxCant;
+                    Total = CantExistente*PrecioUnit;
+                    aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+                    SetConsoleTextAttribute(hConsole, 2);
+                    cout<<"\tREGISTRO MODIFICADO"<<endl<<endl<<endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                }
+                else{
+                    SetConsoleTextAttribute(hConsole, 4);
+                    cout<<"\tNO HAY"<<auxCant<<" UNIDADES DISPONIBLES"<<endl<<endl<<endl;
+                    aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+                    SetConsoleTextAttribute(hConsole, 7);
+                }
+            }else{
+                aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+            }
+            lectura>>Codigo;
+        }
+        
+    }else{
+        SetConsoleTextAttribute(hConsole, 4);
+        cout<<"\tNO SE PUDO ABRIR EL ARCHIVO O AUN NO HA IDO CREADO"<<endl<<endl<<endl;
+        SetConsoleTextAttribute(hConsole, 7);
+    }
+    if (encontrado == false)
+    {
+        SetConsoleTextAttribute(hConsole, 4);
+        cout<<"\tNO EXISTENTE RESGITROS CON EL CODIGO"<<auxCodigo<<endl<<endl<<endl;
+        SetConsoleTextAttribute(hConsole, 7);
+    }
+    aux.close();
+    lectura.close();
+    remove("inventario.txt");
+    rename("auxiliar.txt","inventario.txt");
+}
+void Facturar(){
+    ofstream escritura;
+    ofstream aux;
+    ifstream lectura;
+    encontrado = false;
+    int auxCodigo = 0;
+    int auxCant;
+    int DUI;
+    char NombreCliente[50];
+    float superTotal;
+
+    escritura.open("FACTURA.txt",ios::out|ios::app);
+    std::time_t t = std::time(0);
+
+    escritura<<endl;
+    escritura<<"\t\tDOCUMENTO TRIBUTARIO ELECTRONICO"<<endl<<endl;
+    escritura<<"\t\t\tFACTURA ELECTRONICA"<<endl;
+    escritura<<"\t\t\txxxxxxxxxxxxxxxxxxx"<<endl;
+    escritura<<"======================= DATOS DEL EMISOR =========================="<<endl;
+    escritura<<"\t\t\tDUI: 252525252-2"<<endl;
+    escritura<<"\t\t\tCOMERCIAL LA U"<<endl;
+    escritura<<"\t"<<"      "<<"Santa Ana 24.av Norte"<<endl;
+    escritura<<"\t\t"<<"      "<<"El SALVADOR"<<endl<<endl;
+    escritura<<"======================= DATOS DEL COMPROBANTE ====================="<<endl;
+    std::tm* now =std::localtime(&t);
+    escritura<<"Fecha: ";
+    escritura<<now->tm_mday <<'-'<<(now->tm_mon + 1) << '-' << (now->tm_year + 1900)<< "\n";
+    cout<<"INGRESE EL DUI DEL CONTRIBUYENTE"<<endl;
+    cin>>DUI;
+    escritura<<"DUI: "<<DUI<<endl;
+    cout<<"INGRESE EL NOMBRE"<<endl;
+    cin>>NombreCliente;
+    escritura<<"NOMBRE: "<<NombreCliente<<endl<<endl<<endl;
+    escritura<<"======================= DESCRIPCION DE LA FACTURA =================="<<endl;
+    escritura<<"Cod."<<"\tPRODUCTO"<<"\tCant."<<"\t\tPRECIO"<<"\t\tTotal"<<endl;
+
+    int Opc = 0;
+    do
+    {
+       system("cls");
+       aux.open("auxiliar.txt",ios::out);
+       lectura.open("inventario.txt",ios::in);
+       cout<<endl;
+       SetConsoleTextAttribute(hConsole, 4);
+       cout<<"\tAGREGAR PRODUCTO A LA FACTURA"<<endl<<endl;
+       SetConsoleTextAttribute(hConsole, 8);
+       cout<<"1. FACTURAR UN PRODUCTO"<<endl;
+       cout<<"2. SALIR"<<endl;
+       SetConsoleTextAttribute(hConsole, 2);
+       cout<<"QUE DESEAS HACER? ";
+       SetConsoleTextAttribute(hConsole, 8);
+       cin>>Opc;
+       switch (Opc)
+       {
+       case 1:
+             system("cls");
+             if(aux.is_open() && lectura.is_open()){
+                SetConsoleTextAttribute(hConsole, 1);
+                 cout<<"INGRESE EL CODIGO DEL A FACTURAR: ";
+                 cin>>auxCodigo;
+                 cout<<endl<<endl;
+                 lectura>>Codigo;
+                 while (!lectura.eof())
+                 {
+                    lectura>>nombre>>CantExistente>>PrecioUnit>>Total;
+                    if(auxCodigo == Codigo){
+                        encontrado = true;
+
+
+                        SetConsoleTextAttribute(hConsole, 4);
+                        cout<<"\tDATOS DEL PRODUCTO A FACTURAR"<<endl;
+                        SetConsoleTextAttribute(hConsole, 8);
+                        cout<<"========================================"<<endl;
+                        cout<<"Codigo: "<<"\t\t\t"<<Codigo<<endl;
+                        cout<<"Nombre del Producto: "<<"\t\t"<<nombre<<endl;
+                        cout<<"Cantidad Existente: "<<"\t\t"<<CantExistente<<endl;
+                        cout<<"Precio Unitario: "<<"\t\t$"<<PrecioUnit<<endl;
+                        cout<<"Total: "<<"\t\t\t\t$"<<Total<<endl;
+                        cout<<"========================================"<<endl;
+                        SetConsoleTextAttribute(hConsole, 1);
+                        cout<<"INGRESE LA CANTIDAD A DESCARGAR DEL INVENTARIO DEL PRODUCTO"<<nombre<<": ";
+                        SetConsoleTextAttribute(hConsole, 8);
+                        cin>>auxCant;
+                        cout<<endl;
+                        if(auxCant <= CantExistente){
+                            CantExistente  = CantExistente - auxCant;
+                            Total = CantExistente*PrecioUnit;
+                            TotalAux = auxCant*PrecioUnit;
+                            superTotal = superTotal + TotalAux;
+                            aux<<Codigo<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+                            escritura<<" "<<auxCodigo<<"\t"<<nombre<<"\t\t"<<" "<<auxCant<<"\t\t"<<" $."<<PrecioUnit<<"\t\t"<<" $."<<Total<<endl;
+                            SetConsoleTextAttribute(hConsole, 2);
+                            cout<<"\t REGISTRO MODIFICADO"<<endl<<endl<<endl;
+                            SetConsoleTextAttribute(hConsole, 7);
+                        }else{
+                            SetConsoleTextAttribute(hConsole, 4);
+                            cout<<"\tNO HAY "<<auxCant<<" UNIDADES DISPONIBLES"<<endl<<endl<<endl;
+                            aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+                            SetConsoleTextAttribute(hConsole, 7);
+                        }
+
+                    }else{
+                            aux<<Codigo<<"\t"<<nombre<<"\t"<<CantExistente<<"\t"<<PrecioUnit<<"\t"<<Total<<endl;
+
+                    }
+                    lectura>>Codigo;
+                 }
+                 
+             }else{
+                SetConsoleTextAttribute(hConsole, 4);
+                cout<<"\tNO SE PUDO ABRIR EL ARCHIVO O AUN NO HA SIDO CREADO"<<endl<<endl<<endl;
+                SetConsoleTextAttribute(hConsole, 7);
+             }
+             if(encontrado == false){
+                SetConsoleTextAttribute(hConsole, 4);
+                cout<<"\tNO EXISTEN REGISTROS CON EL CODIGO"<<auxCodigo<<endl<<endl<<endl;
+                SetConsoleTextAttribute(hConsole, 7);
+             }
+             aux.close();
+             lectura.close();
+             remove("inventario.txt");
+             rename("auxiliar.txt","inventario.txt");
+             system("pause");
+        break;
+        case 2: 
+                system("cls");
+                salir();
+       
+       default:
+            cout<<"!Opcion Incorrecta"<<endl;
+        break;
+       }
+    } while (Opc!=2);
+    escritura<<"\t\t\t\t\t--------------------------------"<<endl;
+    escritura<<"\t\t\t\t\tTotal "<<"\t\t"<<" $."<<superTotal;
+    escritura<<endl<<endl<<endl;
+    escritura<<"\t\t"<<"      "<<"SUJETO A PAGOS TRIMESTRALES"<<endl<<endl;
+    escritura<<"\t\t\tDATOS DEL CERTIFICADOR"<<endl;
+    escritura<<"\t\t\t"<<"    "<<"DUI: 252525252-2"<<endl;
+    escritura<<"\t\t"<<"     "<<"FACTURA DE NIÑÁ MARY"<<endl<<endl;
+    escritura<<"\tCAJERO: EMMANUEL EYES"<<endl;
+    escritura<<"\tCODIGO: 23344556"<<endl;
+    escritura<<endl<<endl<<endl<<endl<<endl;
+    escritura.close(); 
+}
+void MostrarFact(){
+    char cadena[100];
+
+    ifstream apertura("FACTURA.txt");
+    if(apertura.fail()){
+        cout<<"EL ARCHIVO NO EXISTE"<<endl;
+    }else{
+        while (apertura.getline(cadena,100) != NULL)
+        {
+            cout<<cadena<<endl;
+        }
+        
+    }
+}
+
+void Salir(){
+    SetConsoleTextAttribute(hConsole, 2);
+    cout<<endl<<endl;
+    cout<<"\t\tPROGRAMA FINALIZADO"<<endl<<endl<<endl;
+    SetConsoleTextAttribute(hConsole, 7);
 }
